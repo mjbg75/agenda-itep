@@ -1,0 +1,107 @@
+/* src/LoginScreen.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente o formCard */
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0; /* Fundo branco mais escuro */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.formCard {
+  background-color: #f9f9f9; /* Branco claro para a janela de login */
+  padding: 30px; /* Padding interno */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Estica os itens (form, header) para preencher a largura */
+  gap: 20px; /* Espaço entre os elementos internos */
+  width: 90%;
+  max-width: 400px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px; /* Espaçamento entre o cabeçalho e o formulário */
+}
+
+.title {
+  font-size: 4.5em; /* SIGEA AINDA MAIS MAIOR */
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+  font-weight: 800; /* Negrito */
+  color: var(--primary-dark-blue); /* Azul escuro */
+}
+
+.subtitle {
+  font-size: 0.9em; /* Sistema de Gerenciamento de Agenda MENOR */
+  margin-top: 0;
+  font-weight: 700; /* NEGITO */
+  color: var(--primary-dark-blue); /* Azul escuro */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaço entre os inputs */
+}
+
+.input {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  color: var(--text-primary);
+  background-color: #e0f2f7; /* Azul claro para o fundo dos inputs */
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.button {
+  background-color: var(--primary-dark-blue); /* Fundo AZUL ESCURO para o botão ENTRAR */
+  color: var(--text-white); /* Letras brancas no botão */
+  border: none;
+  padding: 12px 20px; /* Padding ajustado */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em; /* Fonte MENOR para o botão */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  background-color: #001a33; /* Um azul um pouco mais escuro no hover */
+  transform: translateY(-1px);
+}
+
+.errorText {
+  color: var(--accent-red);
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: -10px;
+}
+
+.switchText {
+  margin-top: 15px;
+  color: var(--text-secondary); /* Cinza escuro para o texto "Não tem conta?" */
+  font-size: 0.95em;
+  text-align: center;
+}
+
+.switchLink {
+  color: var(--primary-blue); /* Azul para o link "Cadastre-se" */
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.switchLink:hover {
+  color: #002e5c; /* Tom mais escuro no hover */
+}

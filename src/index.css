@@ -1,0 +1,37 @@
+/* src/index.css */
+
+:root {
+  /* Cores primárias */
+  --primary-dark-blue: #001f3f; /* Azul escuro principal */
+  --primary-blue: #003366;    /* Um tom de azul ligeiramente mais claro para detalhes */
+  --text-white: #ffffff;     /* Texto branco */
+  --background-white: #ffffff; /* Fundo branco */
+
+  /* Cores de destaque (para sucesso/adicionar e erro/passado) */
+  --accent-green: #28a745;
+  --accent-red: #dc3545;
+
+  /* Cores de texto */
+  --text-primary: #333333; /* Texto escuro para contraste no branco */
+  --text-secondary: #666666; /* Texto cinza para descrições menores */
+
+  /* Cores de fundo */
+  --background-body: #f4f7f6; /* Um cinza muito claro para o fundo geral */
+  --background-grey-light: #eeeeee; /* Um cinza claro para elementos de fundo */
+
+  /* Fontes */
+  --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-body);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

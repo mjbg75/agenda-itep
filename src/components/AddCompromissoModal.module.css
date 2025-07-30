@@ -1,0 +1,207 @@
+/* src/components/AddCompromissoModal.module.css */
+
+/* Define variáveis CSS para cores e outros valores reutilizáveis */
+:root {
+  --primary-blue: #0056b3; /* Azul principal para botões de ação e títulos */
+  --primary-green: #28a745; /* Verde para botões de adição */
+  --accent-red: #dc3545; /* Vermelho para ações de exclusão/erro */
+  --background-light: #f4f7f6; /* Fundo geral claro */
+  --background-secondary: #ffffff; /* Fundo de componentes (modais, inputs) */
+  --text-primary: #333; /* Cor principal do texto */
+  --text-secondary: #666; /* Cor secundária do texto */
+  --border-color: #ddd; /* Cor das bordas de inputs e elementos */
+  --shadow-light: rgba(0, 0, 0, 0.1); /* Sombra leve para elementos */
+  --shadow-medium: rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada para modais */
+}
+
+/* Overlay escuro que cobre o restante da tela quando o modal está aberto */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente escuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o modal fique acima de outros elementos */
+}
+
+/* Conteúdo principal do modal */
+.modalContent {
+  background-color: var(--background-secondary); /* Cor de fundo clara do modal */
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%; /* Largura padrão */
+  max-width: 500px; /* Largura máxima */
+  box-shadow: 0 5px 15px var(--shadow-medium);
+  position: relative;
+  animation: fadeIn 0.3s ease-out; /* Animação de fade-in ao abrir */
+}
+
+/* Animação de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Título do modal */
+.modalContent h2 {
+  color: var(--primary-blue);
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+/* Botão de fechar (X) no canto superior direito */
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: var(--accent-red);
+}
+
+/* Estilos para o formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento entre os grupos de formulário */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="date"],
+.formGroup input[type="time"],
+.formGroup input[type="password"], /* Adicionado para o campo de senha no modal de confirmação */
+.formGroup textarea {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1em;
+  width: 100%; /* Garante que os inputs preencham o espaço */
+  box-sizing: border-box; /* Inclui padding e border no width/height */
+  background-color: var(--background-light); /* Fundo claro para inputs */
+  color: var(--text-primary);
+}
+
+.formGroup textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 80px; /* Altura mínima para o textarea */
+}
+
+/* Estilo para o botão de submissão (azul) */
+.submitButton {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Por padrão, ocupa a largura total */
+}
+
+.submitButton:hover {
+  background-color: #004080; /* Tom mais escuro no hover */
+  transform: translateY(-1px); /* Pequeno efeito de elevação */
+}
+
+/* Estilo para botões gerais em grupo (como Adicionar Evento/Processo na tela principal) */
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento entre os botões */
+  margin-top: 20px;
+}
+
+.buttonGroup .addButton {
+  background-color: var(--primary-green); /* Cor verde para botões de adição */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.buttonGroup .addButton:hover {
+  background-color: #218838; /* Tom mais escuro no hover */
+  transform: translateY(-1px);
+}
+
+/* **NOVO ESTILO:** Grupo de botões de ação (para Salvar e Excluir no modal de edição, ou Confirmar/Cancelar no modal de senha) */
+.actionButtonGroup {
+  display: flex;
+  justify-content: space-between; /* Espaça os botões igualmente */
+  gap: 15px; /* Espaçamento entre os botões */
+  margin-top: 20px; /* Margem acima do grupo */
+}
+
+/* Adapta os botões dentro do actionButtonGroup para dividir o espaço */
+.actionButtonGroup .submitButton,
+.actionButtonGroup .deleteButton,
+.actionButtonGroup .addButton { /* Adicionado .addButton para o modal de confirmação */
+  flex: 1; /* Faz os botões dividirem o espaço igualmente */
+  width: auto; /* Anula o width: 100% que pode vir de .submitButton */
+  margin-top: 0; /* Remove margem superior que era para layout vertical */
+}
+
+/* Estilo para o botão de exclusão (vermelho) */
+.deleteButton {
+  background-color: var(--accent-red);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c9302c; /* Tom mais escuro no hover */
+  transform: translateY(-1px);
+}
+
+/* Mensagens de erro (usado no login, e agora no modal de confirmação de senha) */
+.errorMessage {
+  color: var(--accent-red); /* Usa a variável de cor vermelha */
+  text-align: center;
+  margin-top: -10px; /* Ajusta a margem para ficar mais perto do campo */
+  font-size: 0.9em;
+  font-weight: bold;
+}

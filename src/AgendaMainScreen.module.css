@@ -1,0 +1,374 @@
+/* src/AgendaMainScreen.module.css */
+
+/* Define variáveis CSS para cores, tamanhos de fonte e outros valores reutilizáveis */
+:root {
+  --primary-blue: #0056b3;
+  --primary-dark-blue: #004080;
+  --accent-red: #dc3545;
+  --background-white-pure: #FFFFFF; /* Branco puro para o fundo das caixas */
+  --background-light-grey: #F0F0F0; /* Branco mais escuro para o fundo da tela e rodapé */
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.3);
+
+  /* NOVAS VARIÁVEIS DE FONTE - TAMANHOS REDUZIDOS */
+  --font-size-base: 0.9em;
+  --font-size-small: 0.75em;
+  --font-size-xsmall: 0.6em;
+  --font-size-large: 1.3em;
+  --font-size-button: 1em;
+  --font-size-item-title: 1.1em;
+  --font-size-item-detail: 0.85em;
+  --font-size-date-display: 1em;
+}
+
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-light-grey); /* Fundo da tela principal (branco mais escuro) */
+  font-family: Arial, sans-serif;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+}
+
+.loadingText, .errorMessage {
+  text-align: center;
+  padding: 20px;
+  font-size: var(--font-size-large);
+  color: var(--accent-red);
+}
+
+.contentWrapper {
+  display: flex;
+  flex: 1;
+  padding: 15px;
+  gap: 15px;
+  box-sizing: border-box;
+}
+
+.column {
+  background-color: var(--background-white-pure); /* Fundo das colunas (branco claro) */
+  border-radius: 8px;
+  box-shadow: 0 1px 8px var(--shadow-light);
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente o conteúdo da coluna */
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.columnTitle {
+  color: var(--primary-blue);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: var(--font-size-large);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ajustes específicos para a coluna do calendário */
+.calendarColumn {
+  overflow: hidden; /* Oculta conteúdo que ultrapassar a área */
+}
+
+/* Estilos para o CalendarComponent em si (o wrapper que você adicionou no JS) */
+.calendarComponentContainer {
+  width: 100%;
+  /* AUMENTADO: Limite a largura máxima para que os quadrados do dia fiquem bem distribuídos */
+  max-width: 400px; /* Ajuste este valor. 400px ou 450px geralmente funciona bem para um calendário. */
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* Ajuste para o CalendarComponent para garantir que ele se adapte bem */
+/* (Se o CalendarComponent for um <table> ou similar, pode precisar de estilos como estes) */
+/* Essas regras são genéricas e podem precisar de ajustes específicos para a sua biblioteca de calendário (ex: react-calendar) */
+.calendarComponentContainer table,
+.calendarComponentContainer .react-calendar { /* Exemplo: se usar 'react-calendar' */
+  width: 100% !important; /* Força a largura total dentro do container */
+  border: none !important; /* Remove bordas padrão de bibliotecas, se houver */
+  font-family: Arial, sans-serif !important; /* Garante a fonte, se a lib não usar */
+}
+/* Estilos adicionais para células de dia do calendário, se precisar de mais espaço */
+.calendarComponentContainer .react-calendar__tile { /* Exemplo para react-calendar */
+    height: 40px; /* Ajuste a altura das células do dia para ficarem mais quadradas */
+    line-height: 40px; /* Alinha o texto verticalmente no meio */
+    display: flex; /* Permite centralizar o número do dia */
+    justify-content: center;
+    align-items: center;
+}
+
+
+.selectedDateDisplay {
+  text-align: center;
+  font-size: var(--font-size-date-display);
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.listContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.itemsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.eventoItemDetails,
+.processoItemDefault {
+  background-color: var(--background-light-grey); /* Fundo dos itens da lista (mantido como branco mais escuro para contraste leve) */
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.eventoItemDetails:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.eventoItemDetails h4,
+.processoItemDefault h4 {
+  color: var(--primary-blue);
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: var(--font-size-item-title);
+}
+
+.eventoItemDetails p,
+.processoItemDefault p {
+  margin: 3px 0;
+  font-size: var(--font-size-item-detail);
+  line-height: 1.3;
+}
+
+.placeholderText {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 15px;
+  font-size: var(--font-size-base);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.buttonGroup {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: var(--font-size-button);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-dark-blue);
+  transform: translateY(-1px);
+}
+
+.footerUser {
+  background-color: var(--background-light-grey); /* Fundo do rodapé (branco mais escuro) */
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  font-size: var(--font-size-base);
+  box-sizing: border-box;
+}
+
+/* Estilos para o bloco de texto institucional */
+.institutionalInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha o texto à esquerda */
+  color: var(--primary-dark-blue);
+}
+
+.institutionalText {
+  font-size: var(--font-size-small);
+  margin-bottom: 1px; /* Pequeno espaço entre as linhas de texto */
+  white-space: nowrap; /* Evita que o texto quebre em várias linhas desnecessariamente */
+}
+
+.userLogoutSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: var(--primary-dark-blue);
+}
+
+.userNameDisplay {
+  font-weight: bold;
+  font-size: var(--font-size-small);
+  margin-bottom: 1px;
+}
+
+.userEmailDisplay {
+  font-size: var(--font-size-xsmall);
+  opacity: 0.9;
+}
+
+.logoutButton {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: var(--font-size-small);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.logoutButton:hover {
+  background-color: var(--primary-dark-blue);
+}
+
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .column {
+    margin-bottom: 10px;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .columnTitle {
+    font-size: 1.2em;
+  }
+
+  .selectedDateDisplay {
+    font-size: 0.9em;
+  }
+
+  /* Ajuste para o calendário em telas menores */
+  .calendarComponentContainer {
+      max-width: 100%; /* Permite que o calendário ocupe a largura total em mobile */
+  }
+  .calendarComponentContainer .react-calendar__tile {
+      height: 35px; /* Altura um pouco menor para células do dia em mobile */
+      line-height: 35px;
+  }
+
+
+  .eventoItemDetails,
+  .processoItemDefault {
+    padding: 10px;
+    margin-bottom: 6px;
+  }
+
+  .eventoItemDetails h4,
+  .processoItemDefault h4 {
+    font-size: 1em;
+  }
+
+  .eventoItemDetails p,
+  .processoItemDefault p {
+    font-size: 0.8em;
+  }
+
+  .buttonGroup {
+    margin-top: 10px;
+    gap: 6px;
+  }
+
+  .submitButton {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  .footerUser {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .institutionalInfo {
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .institutionalText {
+    font-size: 0.8em;
+    text-align: center;
+  }
+
+  .userLogoutSection {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .userInfo {
+    align-items: center;
+    width: 100%;
+  }
+
+  .userNameDisplay {
+    font-size: 0.8em;
+  }
+
+  .userEmailDisplay {
+    font-size: 0.65em;
+  }
+
+  .logoutButton {
+    width: 100%;
+    font-size: 0.8em;
+    padding: 7px 12px;
+  }
+}

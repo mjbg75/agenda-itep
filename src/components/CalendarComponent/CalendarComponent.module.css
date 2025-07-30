@@ -1,0 +1,140 @@
+/* src/components/CalendarComponent/CalendarComponent.module.css */
+
+.calendarContainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-top: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.monthYearDisplay {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--primary-dark-blue);
+}
+
+.navButton {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.navButton:hover {
+  background-color: #004080;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  /* Garante que o box-model seja consistente */
+  box-sizing: border-box;
+}
+
+.weekdays div {
+  padding: 8px 0;
+  box-sizing: border-box; /* Adicionado para alinhamento */
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px; /* Mantém o espaçamento entre os dias */
+  flex-grow: 1;
+  box-sizing: border-box; /* Adicionado para alinhamento */
+}
+
+.calendarDay {
+  background-color: var(--text-white);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease; /* Adiciona border-color na transição */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box; /* Adicionado para alinhamento */
+}
+
+.calendarDay:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.emptyDay {
+  background-color: var(--light-gray);
+  border: 1px dashed var(--border-color);
+  border-radius: 5px;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box; /* Adicionado para alinhamento */
+}
+
+/* Estilo para dias com eventos: Fundo vermelho */
+.hasEvent {
+  background-color: var(--accent-red);
+  color: var(--text-white);
+  font-weight: bold;
+  border-color: var(--accent-red);
+}
+
+/* Estilo para o dia atual */
+.isToday {
+  border: 2px solid var(--primary-blue);
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0.3);
+}
+
+.hasEvent.isToday {
+  background-color: #c0392b;
+  border-color: var(--primary-blue);
+}
+
+/* NOVO ESTILO: Dia selecionado no calendário */
+.isSelected {
+  background-color: var(--primary-blue); /* Fundo azul para o dia selecionado */
+  color: var(--text-white);
+  border: 2px solid var(--primary-dark-blue); /* Borda mais escura */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05); /* Um pequeno zoom para destacar */
+}
+
+.isSelected.hasEvent { /* Se o dia selecionado tem evento */
+  background-color: var(--primary-blue); /* Mantém azul */
+  border-color: var(--accent-red); /* Borda vermelha para indicar que tem evento */
+}
+
+.isSelected.isToday { /* Se o dia selecionado é o dia atual */
+  background-color: var(--primary-blue);
+  border-color: var(--accent-green); /* Borda verde para indicar que é hoje e selecionado */
+}
+.isSelected.isToday.hasEvent { /* Se o dia selecionado é hoje e tem evento */
+  background-color: var(--primary-blue);
+  border-color: var(--accent-green); /* Borda verde */
+}
