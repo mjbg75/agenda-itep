@@ -37,7 +37,7 @@ const CalendarComponent = ({ events, onDaySelect, selectedDate }) => {
 
     // Preencher os dias do mês atual
     for (let i = 1; i <= daysInMonth; i++) {
-      const dayDate = new Date(year, month, i);
+      // const dayDate = new Date(year, month, i);
       const formattedDayDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
       const hasEvent = events.some(event => event.dataEvento === formattedDayDate);
       days.push({
