@@ -1,15 +1,8 @@
-// src/firebaseConfig.js
+// src/services/firebaseConfig.js
 
 import { initializeApp } from 'firebase/app';
-// IMPORTAÇÃO DE FIRESTORE: APENAS UMA VEZ AQUI DO MÓDULO 'firebase/firestore'
 import { getFirestore } from 'firebase/firestore';
-// IMPORTAÇÕES DE AUTH: APENAS UMA VEZ AQUI DO MÓDULO 'firebase/auth'
-import {
-  getAuth,
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-  signInWithEmailAndPassword // Mantenha se você usa esta função em LoginScreen
-} from 'firebase/auth';
+import { getAuth } from 'firebase/auth'; 
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -23,9 +16,11 @@ const firebaseConfig = {
   measurementId: "G-XQ4D3XPYY8"
 };
 
-// Inicialize o Firebase
-const app = initializeApp(firebaseConfig);
 
-// Obtenha instâncias dos serviços e exporte-as
-export const db = getFirestore(app);
-export const auth = getAuth(app); // Garanta que 'auth' está sendo exportado aqui
+// Inicializa o Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app); // Instância de autenticação
+
+// Exporte as instâncias que serão usadas em outros arquivos
+export { db, auth };

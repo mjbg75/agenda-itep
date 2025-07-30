@@ -1,140 +1,95 @@
-/* src/components/CalendarComponent/CalendarComponent.module.css */
+/* src/components/CalendarComponent/CalendarComponent.css */
 
-.calendarContainer {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background-color: var(--card-bg);
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  margin-top: 15px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+.calendar-container {
+  width: 100%; /* Ajustado para 100% do seu container pai */
+  max-width: 400px; /* Isso deve vir do AgendaMainScreen.module.css agora */
+  /* Removido borda e sombra aqui para que o estilo do componente principal seja aplicado */
+  font-family: Arial, sans-serif;
+  box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
 
-.calendarHeader {
+.calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  margin-bottom: 15px;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border-color);
 }
 
-.monthYearDisplay {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: var(--primary-dark-blue);
+.calendar-header h2 {
+  font-size: 1.2em;
+  color: var(--primary-blue);
+  margin: 0;
+  text-transform: capitalize; /* Capitaliza a primeira letra do mês */
 }
 
-.navButton {
+.calendar-header button {
   background-color: var(--primary-blue);
   color: white;
   border: none;
-  border-radius: 5px;
   padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
   font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
 }
 
-.navButton:hover {
-  background-color: #004080;
+.calendar-header button:hover {
+  background-color: var(--primary-dark-blue);
 }
 
-.weekdays {
+.calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, 1fr); /* 7 colunas de largura igual */
+  gap: 5px; /* Espaço entre os quadrados dos dias */
   text-align: center;
-  font-weight: bold;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-  /* Garante que o box-model seja consistente */
-  box-sizing: border-box;
 }
 
-.weekdays div {
+.calendar-day-name {
+  font-weight: bold;
+  color: var(--text-secondary);
+  padding: 5px 0;
+  font-size: 0.8em;
+}
+
+.calendar-day {
   padding: 8px 0;
-  box-sizing: border-box; /* Adicionado para alinhamento */
-}
-
-.calendarGrid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px; /* Mantém o espaçamento entre os dias */
-  flex-grow: 1;
-  box-sizing: border-box; /* Adicionado para alinhamento */
-}
-
-.calendarDay {
-  background-color: var(--text-white);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  padding: 10px 5px;
-  text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease; /* Adiciona border-color na transição */
-  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.2s, border-color 0.2s;
+  min-height: 40px; /* Garante que os quadrados tenham uma altura mínima */
   display: flex;
-  align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
-  box-sizing: border-box; /* Adicionado para alinhamento */
+  align-items: center;
+  font-size: 0.9em;
+  border: 1px solid transparent; /* Adiciona uma borda transparente para manter o layout */
+  box-sizing: border-box; /* Crucial para o alinhamento de grid */
 }
 
-.calendarDay:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.calendar-day.empty {
+  background-color: transparent;
+  cursor: default;
 }
 
-.emptyDay {
-  background-color: var(--light-gray);
-  border: 1px dashed var(--border-color);
-  border-radius: 5px;
-  aspect-ratio: 1 / 1;
-  box-sizing: border-box; /* Adicionado para alinhamento */
+.calendar-day:not(.empty):hover {
+  background-color: #e0e0e0;
 }
 
-/* Estilo para dias com eventos: Fundo vermelho */
-.hasEvent {
-  background-color: var(--accent-red);
-  color: var(--text-white);
+.calendar-day.selected {
+  background-color: var(--primary-blue);
+  color: white;
   font-weight: bold;
-  border-color: var(--accent-red);
 }
 
-/* Estilo para o dia atual */
-.isToday {
-  border: 2px solid var(--primary-blue);
-  box-shadow: 0 0 5px rgba(0, 0, 255, 0.3);
+.calendar-day.has-event {
+  border: 1px solid var(--accent-red); /* Borda vermelha para dias com evento */
+  font-weight: bold;
+  color: var(--primary-blue);
 }
 
-.hasEvent.isToday {
-  background-color: #c0392b;
-  border-color: var(--primary-blue);
-}
-
-/* NOVO ESTILO: Dia selecionado no calendário */
-.isSelected {
-  background-color: var(--primary-blue); /* Fundo azul para o dia selecionado */
-  color: var(--text-white);
-  border: 2px solid var(--primary-dark-blue); /* Borda mais escura */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  transform: scale(1.05); /* Um pequeno zoom para destacar */
-}
-
-.isSelected.hasEvent { /* Se o dia selecionado tem evento */
-  background-color: var(--primary-blue); /* Mantém azul */
-  border-color: var(--accent-red); /* Borda vermelha para indicar que tem evento */
-}
-
-.isSelected.isToday { /* Se o dia selecionado é o dia atual */
-  background-color: var(--primary-blue);
-  border-color: var(--accent-green); /* Borda verde para indicar que é hoje e selecionado */
-}
-.isSelected.isToday.hasEvent { /* Se o dia selecionado é hoje e tem evento */
-  background-color: var(--primary-blue);
-  border-color: var(--accent-green); /* Borda verde */
+.calendar-day.selected.has-event {
+  background-color: var(--primary-dark-blue); /* Cor para dia selecionado com evento */
+  border-color: white;
+  color: white;
 }
